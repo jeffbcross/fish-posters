@@ -1,0 +1,6 @@
+<ul>
+  <li *ngFor="let f of fish">
+    {{f.name}}
+    <img [src]="f.pic" [alt]="f.name + ' thumbnail'">
+  </li>
+</ul>
