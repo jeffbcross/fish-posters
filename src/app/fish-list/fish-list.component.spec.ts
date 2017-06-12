@@ -3,6 +3,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { FishListComponent } from './fish-list.component';
 import { By } from '@angular/platform-browser';
+import { ProductsService } from 'app/products.service';
 
 describe('FishListComponent', () => {
   let component: FishListComponent;
@@ -20,7 +21,13 @@ describe('FishListComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ FishListComponent ],
-      imports: [RouterTestingModule]
+      imports: [RouterTestingModule],
+      providers: [{
+        provide: ProductsService,
+        useValue: {
+          fish: sampleFish
+        }
+      }]
     })
     .compileComponents();
   }));
@@ -28,7 +35,6 @@ describe('FishListComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(FishListComponent);
     component = fixture.componentInstance;
-    component.fish = sampleFish;
     fixture.detectChanges();
   });
 

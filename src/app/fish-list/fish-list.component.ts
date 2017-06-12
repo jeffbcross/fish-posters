@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductsService, Fish } from '../products.service';
 
 @Component({
   selector: 'app-fish-list',
@@ -6,17 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./fish-list.component.scss']
 })
 export class FishListComponent implements OnInit {
-  fish = [{
-    id: 0,
-    name: 'squid',
-    pic: '/assets/squid-full.jpg'
-  }, {
-    id: 1,
-    name: 'halibut',
-    pic: '/assets/halibut-full.jpg'
-  }];
-
-  constructor() { }
+  fish: Fish[];
+  constructor(products: ProductsService) {
+    this.fish = products.fish;
+  }
 
   ngOnInit() {
   }

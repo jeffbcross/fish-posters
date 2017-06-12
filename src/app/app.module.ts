@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { FishListComponent } from './fish-list/fish-list.component';
 import { FishDetailComponent } from './fish-detail/fish-detail.component';
+import { ProductsService } from 'app/products.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,9 @@ import { FishDetailComponent } from './fish-detail/fish-detail.component';
       }
     ])
   ],
-  providers: [],
+  providers: [
+    ProductsService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
