@@ -7,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FishListComponent implements OnInit {
   fish = [{
+    id: 0,
     name: 'squid',
     pic: '/assets/squid-full.jpg'
   }, {
+    id: 1,
     name: 'halibut',
     pic: '/assets/halibut-full.jpg'
   }];
