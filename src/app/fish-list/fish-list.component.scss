@@ -1,0 +1,31 @@
+$paddingBase: 25px;
+
+.title {
+  color: #333;
+  margin: $paddingBase / 2;
+}
+
+.fish-list {
+  margin: 0;
+  padding: $paddingBase / 2;
+  &-item {
+    max-width: 300px;
+    border: 1px solid #999;
+    border-radius: 5px;
+    margin: $paddingBase 0;
+    padding: $paddingBase / 2;
+    display: block;
+
+    &-title {
+      font-weight: bold;
+      font-size: 18pt;
+      margin: 0 0 $paddingBase / 2;
+      display: block;
+    }
+
+    &-thumbnail {
+      width: 100%;
+      border-radius: 5px;
+    }
+  }
+}
