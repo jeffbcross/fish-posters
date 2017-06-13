@@ -5,6 +5,7 @@ import { By } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { ProductsService } from 'app/products.service';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('FishDetailComponent', () => {
   let component: FishDetailComponent;
@@ -31,7 +32,8 @@ describe('FishDetailComponent', () => {
             pic: '/assets/squid-full.jpg'
           }]
         }
-      }]
+      }],
+      schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
   }));
