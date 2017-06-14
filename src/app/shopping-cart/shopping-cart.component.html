@@ -2,7 +2,9 @@
   <ng-container *ngIf="products$ | async as products">
     <ul *ngIf="products.length; else noProducts">
       <li *ngFor="let product of products">
-        {{product.name}}
+        {{product.quantity}} {{product.name}}
+        <app-button text="+" (click)="onIncrement(product.id)"></app-button>
+        <app-button text="-" (click)="onDecrement(product.id)"></app-button>
       </li>
     </ul>
     <ng-template #noProducts>

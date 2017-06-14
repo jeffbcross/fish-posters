@@ -7,6 +7,7 @@ import { StoreModule, Store } from '@ngrx/store';
 import { ProductsService } from '../products.service';
 import { inject } from '@angular/core/testing';
 import { Observable } from 'rxjs/Observable';
+import { ButtonModule } from '../button/button.module';
 
 describe('ShoppingCartComponent', () => {
   let component: ShoppingCartComponent;
@@ -24,6 +25,7 @@ describe('ShoppingCartComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
+        ButtonModule,
         StoreModule.provideStore(cartReducer, {
           selectedProducts: {}
         })
@@ -61,4 +63,6 @@ describe('ShoppingCartComponent', () => {
     const viewList = fixture.debugElement.queryAll(By.css('.cart-status ul li'));
     expect(viewList.length).toBe(1);
   }));
+
+  // TODO: test increment, decrement
 });

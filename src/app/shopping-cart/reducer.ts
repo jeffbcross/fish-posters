@@ -12,26 +12,33 @@ export interface CartAddAction {
   payload: number;
 }
 
-export type CartAction = CartAddAction;
+export interface CartRemoveAction {
+  type: 'CART_REMOVE';
+  payload: number;
+}
 
-export function cartReducer(state: CartState, action: CartAction) {
+export type CartAction = CartAddAction | CartRemoveAction;
+
+export function cartReducer(state: CartState = {selectedProducts: {}}, action: CartAction) {
   switch (action.type) {
     case 'CART_ADD':
-      // TODO: increment/decrement existing entry or add/remove
-          if (state.selectedProducts[action.payload]) {
-            return {
-              ...state,
-              [action.payload]: state.selectedProducts[action.payload] + 1
-            };
-          } else {
-            return {
-              ...state,
-              selectedProducts: {
-                ...state.selectedProducts,
-                [action.payload]: 1
-              }
-            };
-          }
+      const countForAdd = state.selectedProducts[action.payload] || 0;
+      return {
+        ...state,
+        selectedProducts: {
+          ...state.selectedProducts,
+          [action.payload]: countForAdd + 1
+        }
+      };
+    case 'CART_REMOVE':
+      const countForRemove = state.selectedProducts[action.payload] || 0;
+      return {
+        ...state,
+        selectedProducts: {
+          ...state.selectedProducts,
+          [action.payload]: countForRemove > 0 ? countForRemove - 1 : countForRemove
+        }
+      };
     default:
       return state;
   }

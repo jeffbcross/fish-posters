@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Fish, ProductsService } from 'app/products.service';
-import { CartState } from './reducer';
+import { ProductsService } from 'app/products.service';
+import { CartAddAction, CartRemoveAction, CartState } from './reducer';
 import { Store } from '@ngrx/store';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
@@ -12,7 +12,7 @@ import 'rxjs/add/operator/switchMap';
   styleUrls: ['./shopping-cart.component.scss']
 })
 export class ShoppingCartComponent implements OnInit {
-  products$: Observable<Fish[]>;
+  products$: Observable<ShoppingCartItem[]>;
   constructor(private store: Store<CartState>, private products: ProductsService) {
   }
 
@@ -20,7 +20,28 @@ export class ShoppingCartComponent implements OnInit {
     this.products$ = this.store
       .select((cartState: CartState) => cartState.selectedProducts)
       .switchMap(selectedProducts => this.products.fish$
-        .map(fish => fish.filter(f => selectedProducts[f.id])));
+        .map(fish => fish.filter(f => selectedProducts[f.id]))
+        .map(fish => fish.map(f => {
+          return {
+            ...f,
+            quantity: selectedProducts[f.id]
+          };
+        }))
+      );
   }
 
+  onIncrement(id) {
+    this.store.dispatch(<CartAddAction>{type: 'CART_ADD', payload: id});
+  }
+
+  onDecrement(id) {
+    this.store.dispatch(<CartRemoveAction>{type: 'CART_REMOVE', payload: id});
+  }
+
+}
+
+interface ShoppingCartItem {
+  name: string;
+  id: number;
+  quantity: number;
 }
