@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductsService, Fish } from 'app/products.service';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/switchMap';
 
 @Component({
   selector: 'app-fish-detail',
@@ -16,7 +17,7 @@ export class FishDetailComponent implements OnInit {
   ngOnInit() {
     this.product$ = this.route.paramMap
       .map(paramMap => parseInt(paramMap.get('id'), 10))
-      .map(id => this.products.fish
-          .filter(fish => fish.id === id)[0]);
+      .switchMap(id => this.products.fish$
+        .map(fish => fish.filter(f => f.id === id)[0]));
   }
 }

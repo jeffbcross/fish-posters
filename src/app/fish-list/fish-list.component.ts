@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService, Fish } from '../products.service';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-fish-list',
@@ -7,9 +8,9 @@ import { ProductsService, Fish } from '../products.service';
   styleUrls: ['./fish-list.component.scss']
 })
 export class FishListComponent implements OnInit {
-  fish: Fish[];
+  fish$: Observable<Fish[]>;
   constructor(products: ProductsService) {
-    this.fish = products.fish;
+    this.fish$ = products.fish$;
   }
 
   ngOnInit() {

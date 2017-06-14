@@ -1,6 +1,6 @@
 <h2 class="title">Fish Posters</h2>
 <ul class="fish-list">
-  <li *ngFor="let f of fish" class="fish-list-item">
+  <li *ngFor="let f of fish$ | async" class="fish-list-item">
     <h2 class="fish-list-item-title">{{f.name}}</h2>
     <img class="fish-list-item-thumbnail" [src]="f.pic" [alt]="f.name + ' thumbnail'">
     <a [routerLink]="['/fish', f.id]">More Info</a>

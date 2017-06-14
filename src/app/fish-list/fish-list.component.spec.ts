@@ -4,6 +4,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { FishListComponent } from './fish-list.component';
 import { By } from '@angular/platform-browser';
 import { ProductsService } from 'app/products.service';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
 
 describe('FishListComponent', () => {
   let component: FishListComponent;
@@ -25,7 +27,7 @@ describe('FishListComponent', () => {
       providers: [{
         provide: ProductsService,
         useValue: {
-          fish: sampleFish
+          fish$: Observable.of(sampleFish)
         }
       }]
     })

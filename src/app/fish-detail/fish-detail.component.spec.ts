@@ -6,6 +6,8 @@ import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { ProductsService } from 'app/products.service';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
 
 describe('FishDetailComponent', () => {
   let component: FishDetailComponent;
@@ -22,7 +24,7 @@ describe('FishDetailComponent', () => {
       }, {
         provide: ProductsService,
         useValue: {
-          fish: [{
+          fish$: Observable.of([{
             id: 99,
             name: 'Puffer',
             pic: '/assets/halibut-full.jpg'
@@ -30,7 +32,7 @@ describe('FishDetailComponent', () => {
             id: 100,
             name: 'Dory',
             pic: '/assets/squid-full.jpg'
-          }]
+          }])
         }
       }],
       schemas: [NO_ERRORS_SCHEMA]

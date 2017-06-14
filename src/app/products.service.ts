@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class ProductsService {
-  fish: Fish[] = [{
-    id: 0,
-    name: 'squid',
-    pic: '/assets/squid-full.jpg'
-  }, {
-    id: 1,
-    name: 'halibut',
-    pic: '/assets/halibut-full.jpg'
-  }];
+  fish$: Observable<Fish[]>;
+  constructor(private http: Http) {
+    this.fish$ = http.get('/assets/fish.json')
+      .map(res => res.json());
+  }
 }
 
 export interface Fish {
