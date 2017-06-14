@@ -25,10 +25,8 @@ import { cartReducer } from 'app/shopping-cart/reducer';
     FormsModule,
     HttpModule,
     ButtonModule,
-    StoreModule.provideStore({
-      cart: cartReducer
-    }, {
-      cart: []
+    StoreModule.provideStore(cartReducer, {
+      selectedProducts: {}
     }),
     RouterModule.forRoot([
       {

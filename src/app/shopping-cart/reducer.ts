@@ -17,7 +17,21 @@ export type CartAction = CartAddAction;
 export function cartReducer(state: CartState, action: CartAction) {
   switch (action.type) {
     case 'CART_ADD':
-      // TODO
+      // TODO: increment/decrement existing entry or add/remove
+          if (state.selectedProducts[action.payload]) {
+            return {
+              ...state,
+              [action.payload]: state.selectedProducts[action.payload] + 1
+            };
+          } else {
+            return {
+              ...state,
+              selectedProducts: {
+                ...state.selectedProducts,
+                [action.payload]: 1
+              }
+            };
+          }
     default:
       return state;
   }

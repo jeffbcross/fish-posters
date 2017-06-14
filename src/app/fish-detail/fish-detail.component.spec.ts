@@ -8,6 +8,8 @@ import { ProductsService } from 'app/products.service';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
+import { cartReducer } from '../shopping-cart/reducer';
+import { StoreModule } from '@ngrx/store';
 
 describe('FishDetailComponent', () => {
   let component: FishDetailComponent;
@@ -15,6 +17,11 @@ describe('FishDetailComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+        StoreModule.provideStore(cartReducer, {
+          selectedProducts: {}
+        })
+      ],
       declarations: [ FishDetailComponent ],
       providers: [{
         provide: ActivatedRoute,
