@@ -64,5 +64,29 @@ describe('ShoppingCartComponent', () => {
     expect(viewList.length).toBe(1);
   }));
 
-  // TODO: test increment, decrement
+  it('should increment existing product count', inject([Store], (store: Store<CartState>) => {
+    store.dispatch(<CartAddAction>{type: 'CART_ADD', payload: 42}); // add 1
+    component.onIncrement(42); // increment to 2
+    fixture.detectChanges();
+    const quantities = fixture.debugElement.queryAll(By.css('.quantity'));
+    expect(quantities[0].nativeElement.textContent).toBe('2');
+  }));
+
+  it('should decrement existing product count', inject([Store], (store: Store<CartState>) => {
+    store.dispatch(<CartAddAction>{type: 'CART_ADD', payload: 42}); // add 1
+    component.onIncrement(42); // increment to 2
+    component.onIncrement(42); // increment to 3
+    component.onDecrement(42); // decrement to 2
+    fixture.detectChanges();
+    const quantities = fixture.debugElement.queryAll(By.css('.quantity'));
+    expect(quantities[0].nativeElement.textContent).toBe('2');
+  }));
+
+  it('should not display items when decremented to zero', inject([Store], (store: Store<CartState>) => {
+    store.dispatch(<CartAddAction>{type: 'CART_ADD', payload: 42}); // add 1
+    component.onDecrement(42); // decrement to 0
+    fixture.detectChanges();
+    const statusText = fixture.debugElement.query(By.css('.cart-status')).nativeElement.textContent;
+    expect(statusText.trim()).toContain('No products added to cart.');
+  }));
 });
