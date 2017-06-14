@@ -8,6 +8,7 @@ import { ProductsService } from '../products.service';
 import { inject } from '@angular/core/testing';
 import { Observable } from 'rxjs/Observable';
 import { ButtonModule } from '../button/button.module';
+import 'rxjs/add/observable/of';
 
 describe('ShoppingCartComponent', () => {
   let component: ShoppingCartComponent;
