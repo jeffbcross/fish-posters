@@ -27,7 +27,7 @@ describe('ShoppingCartComponent', () => {
       imports: [
         ButtonModule,
         StoreModule.provideStore(cartReducer, {
-          selectedProducts: {}
+          productQuantities: {}
         })
       ],
       declarations: [ ShoppingCartComponent ],

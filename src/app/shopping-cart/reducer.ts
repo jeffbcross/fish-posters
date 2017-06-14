@@ -1,7 +1,5 @@
-import { Fish } from 'app/products.service';
-
 export interface CartState {
-  selectedProducts: {
+  productQuantities: {
     // id of the fish is the key, and how many of it is the value
     [key: number]: number;
   };
@@ -19,23 +17,23 @@ export interface CartRemoveAction {
 
 export type CartAction = CartAddAction | CartRemoveAction;
 
-export function cartReducer(state: CartState = {selectedProducts: {}}, action: CartAction) {
+export function cartReducer(state: CartState = {productQuantities: {}}, action: CartAction) {
   switch (action.type) {
     case 'CART_ADD':
-      const countForAdd = state.selectedProducts[action.payload] || 0;
+      const countForAdd = state.productQuantities[action.payload] || 0;
       return {
         ...state,
-        selectedProducts: {
-          ...state.selectedProducts,
+        productQuantities: {
+          ...state.productQuantities,
           [action.payload]: countForAdd + 1
         }
       };
     case 'CART_REMOVE':
-      const countForRemove = state.selectedProducts[action.payload] || 0;
+      const countForRemove = state.productQuantities[action.payload] || 0;
       return {
         ...state,
-        selectedProducts: {
-          ...state.selectedProducts,
+        productQuantities: {
+          ...state.productQuantities,
           [action.payload]: countForRemove > 0 ? countForRemove - 1 : countForRemove
         }
       };

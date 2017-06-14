@@ -19,7 +19,7 @@ describe('FishDetailComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         StoreModule.provideStore(cartReducer, {
-          selectedProducts: {}
+          productQuantities: {}
         })
       ],
       declarations: [ FishDetailComponent ],

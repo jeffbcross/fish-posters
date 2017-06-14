@@ -18,7 +18,7 @@ export class ShoppingCartComponent implements OnInit {
 
   ngOnInit() {
     this.products$ = this.store
-      .select((cartState: CartState) => cartState.selectedProducts)
+      .select((cartState: CartState) => cartState.productQuantities)
       .switchMap(selectedProducts => this.products.fish$
         .map(fish => fish.filter(f => selectedProducts[f.id]))
         .map(fish => fish.map(f => {
