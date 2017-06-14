@@ -6,21 +6,20 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { FishListComponent } from './fish-list/fish-list.component';
-import { FishDetailComponent } from './fish-detail/fish-detail.component';
 import { ProductsService } from 'app/products.service';
 import { ButtonComponent } from './button/button.component';
+import { ButtonModule } from 'app/button/button.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FishListComponent,
-    FishDetailComponent,
-    ButtonComponent
+    FishListComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
+    ButtonModule,
     RouterModule.forRoot([
       {
         path: '',
@@ -31,7 +30,7 @@ import { ButtonComponent } from './button/button.component';
         component: FishListComponent
       }, {
         path: 'fish/:id',
-        component: FishDetailComponent
+        loadChildren: './fish-detail/fish-detail.module#FishDetailModule'
       }
     ])
   ],
