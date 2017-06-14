@@ -1,0 +1,12 @@
+<p class="cart-status">
+  <ng-container *ngIf="products$ | async as products">
+    <ul *ngIf="products.length; else noProducts">
+      <li *ngFor="let product of products">
+        {{product.name}}
+      </li>
+    </ul>
+    <ng-template #noProducts>
+      No products added to cart.
+    </ng-template>
+  </ng-container>
+</p>

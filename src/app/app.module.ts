@@ -9,17 +9,27 @@ import { FishListComponent } from './fish-list/fish-list.component';
 import { ProductsService } from 'app/products.service';
 import { ButtonComponent } from './button/button.component';
 import { ButtonModule } from 'app/button/button.module';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { StoreModule } from '@ngrx/store';
+
+import { cartReducer } from 'app/shopping-cart/reducer';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FishListComponent
+    FishListComponent,
+    ShoppingCartComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     ButtonModule,
+    StoreModule.provideStore({
+      cart: cartReducer
+    }, {
+      cart: []
+    }),
     RouterModule.forRoot([
       {
         path: '',
