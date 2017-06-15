@@ -11,8 +11,11 @@ import { ButtonComponent } from './button/button.component';
 import { ButtonModule } from 'app/button/button.module';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { cartReducer } from 'app/shopping-cart/reducer';
+import { fishReducer, FishEffects } from 'app/products.reducer';
 
 @NgModule({
   declarations: [
@@ -25,9 +28,17 @@ import { cartReducer } from 'app/shopping-cart/reducer';
     FormsModule,
     HttpModule,
     ButtonModule,
-    StoreModule.provideStore(cartReducer, {
-      productQuantities: {}
+    EffectsModule.run(FishEffects),
+    StoreModule.provideStore({
+      fish: fishReducer,
+      cart: cartReducer
+    }, {
+      cart: {
+        productQuantities: {}
+      },
+      fish: []
     }),
+    StoreDevtoolsModule.instrumentOnlyWithExtension(),
     RouterModule.forRoot([
       {
         path: '',

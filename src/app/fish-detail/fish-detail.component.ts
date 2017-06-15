@@ -19,10 +19,13 @@ export class FishDetailComponent implements OnInit {
               private store: Store<CartState>) { }
 
   ngOnInit() {
+    this.store.dispatch({
+      type: 'FISH_FETCH'
+    });
     this.product$ = this.route.paramMap
       .map(paramMap => parseInt(paramMap.get('id'), 10))
-      .switchMap(id => this.products.fish$
-        .map(fish => fish.filter(f => f.id === id)[0]));
+      .switchMap(id => this.store.select('fish')
+        .map((fish: Fish[]) => fish.filter(f => f.id === id)[0]));
   }
 
   onBuyClick(id: number) {

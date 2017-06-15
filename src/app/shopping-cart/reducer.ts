@@ -18,9 +18,11 @@ export interface CartRemoveAction {
 export type CartAction = CartAddAction | CartRemoveAction;
 
 export function cartReducer(state: CartState = {productQuantities: {}}, action: CartAction) {
+  console.log('state', state);
   switch (action.type) {
     case 'CART_ADD':
       const countForAdd = state.productQuantities[action.payload] || 0;
+
       return {
         ...state,
         productQuantities: {

@@ -13,12 +13,12 @@ import 'rxjs/add/operator/switchMap';
 })
 export class ShoppingCartComponent implements OnInit {
   products$: Observable<ShoppingCartItem[]>;
-  constructor(private store: Store<CartState>, private products: ProductsService) {
+  constructor(private store: Store<{cart: CartState}>, private products: ProductsService) {
   }
 
   ngOnInit() {
     this.products$ = this.store
-      .select((cartState: CartState) => cartState.productQuantities)
+      .select((appState: {cart: CartState}) => appState.cart.productQuantities)
       .switchMap(productQuantities => this.products.fish$
         .map(fish => fish.filter(f => productQuantities[f.id]))
         .map(fish => fish.map(f => {
